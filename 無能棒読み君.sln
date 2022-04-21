@@ -5,6 +5,8 @@ VisualStudioVersion = 17.1.32407.343
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "無能棒読み君", "無能棒読み君\無能棒読み君.csproj", "{508F8DD8-FEE7-4950-AFEE-172D0C86E085}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MunouPlugin", "MunouPlugin\MunouPlugin.csproj", "{C750CD04-F3C0-4F35-BB3C-467EAD18E9EE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{508F8DD8-FEE7-4950-AFEE-172D0C86E085}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{508F8DD8-FEE7-4950-AFEE-172D0C86E085}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{508F8DD8-FEE7-4950-AFEE-172D0C86E085}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C750CD04-F3C0-4F35-BB3C-467EAD18E9EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C750CD04-F3C0-4F35-BB3C-467EAD18E9EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C750CD04-F3C0-4F35-BB3C-467EAD18E9EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C750CD04-F3C0-4F35-BB3C-467EAD18E9EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
