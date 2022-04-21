@@ -1,7 +1,6 @@
 ﻿using System;
 using Plugin;
 using SitePlugin;
-using PluginCommon;
 using System.ComponentModel.Composition;
 using SuperSimpleTcp;
 using System.Diagnostics;
@@ -25,13 +24,15 @@ namespace MunouPlugin
             //無能棒読み君が同階層にいるか判断し、あるなら起動、ないならプラグイン終了
             if (Process.GetProcessesByName("無能棒読み君").Length <= 0)
             {
-                if (File.Exists(@"plugins\Munou\無能棒読み君.exe"))
-                    proc = Process.Start(@"plugins\Munou\無能棒読み君.exe");
+                if (File.Exists(@"plugins\MunouPlugin\無能棒読み君.exe"))
+                {
+                    proc = Process.Start(@"plugins\MunouPlugin\無能棒読み君.exe");
+                    client.Connect();
+                }
+                    
                 else
                     Dispose();
             }
-
-            client.Connect();
         }
 
         public void OnClosing()
@@ -46,7 +47,27 @@ namespace MunouPlugin
 
         public void OnMessageReceived(ISiteMessage message, IMessageMetadata messageMetadata)
         {
-            var (name, comment) = Tools.GetData(message);
+            var (name, comment) = PluginCommon.Tools.GetData(message);
+            SendMsg(name, comment);
+        }
+        public void SendMsg(string msg)
+        {
+            SendMsg(null, msg);
+        }
+
+        public void SendMsg(string name, string msg)
+        {
+            if (client.IsConnected)
+            {
+                if (name != null && readName)
+                {
+                    client.SendAsync(name + "さん、" + msg);
+                }
+                else
+                {
+                    client.SendAsync(msg);
+                }
+            }
         }
 
         public void OnTopmostChanged(bool isTopmost)
