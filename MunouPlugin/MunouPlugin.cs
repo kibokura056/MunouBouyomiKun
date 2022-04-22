@@ -19,7 +19,7 @@ namespace MunouPlugin
         public string Description { get { return "無能棒読み君と連携するためのプラグインナリ"; } }
         public IPluginHost Host { get; set; }
 
-        bool readName = false;  //名前を読み上げ対象にするかどうか
+        public bool readName = false;  //名前を読み上げ対象にするかどうか
         Process proc;           //無能棒読み君を立ち上げ・終了させるためのプロセス
         SimpleTcpClient client = new SimpleTcpClient("127.0.0.1:1919");
 
@@ -82,7 +82,8 @@ namespace MunouPlugin
 
         public void ShowSettingView()
         {
-
+            SettingForm f = new SettingForm(this);
+            f.ShowDialog();
         }
 
         public void Dispose()
