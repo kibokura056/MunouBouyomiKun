@@ -6,6 +6,10 @@ using SuperSimpleTcp;
 using System.Diagnostics;
 using System.IO;
 
+using PluginCommon;
+using YouTubeLiveSitePlugin;
+using System.Collections.Generic;
+
 namespace MunouPlugin
 {
     [Export(typeof(IPlugin))]
@@ -47,7 +51,8 @@ namespace MunouPlugin
 
         public void OnMessageReceived(ISiteMessage message, IMessageMetadata messageMetadata)
         {
-            var (name, comment) = PluginCommon.Tools.GetData(message);
+            //var (name, comment) = Tools.GetData(message);
+            var (name, comment) = MCVPlugin.GetData(message);
             SendMsg(name, comment);
         }
         public void SendMsg(string msg)
@@ -89,6 +94,78 @@ namespace MunouPlugin
         {
 
         }
+    }
 
+    //MCVのPluginがまともに動作しないので、手動で定義
+    static class MCVPlugin
+    {
+        internal static (string name, string comment) GetData(ISiteMessage message)
+        {
+            string name = "（名前なし）";
+            string comment = "（本文なし）";
+
+            // Youtube Live
+            if (message is IYouTubeLiveMessage youTubeLiveMessage)
+            {
+                name = "（運営）";
+                switch (youTubeLiveMessage.YouTubeLiveMessageType)
+                {
+                    case YouTubeLiveMessageType.Connected:
+                        comment = (youTubeLiveMessage as IYouTubeLiveConnected).Text;
+                        break;
+                    case YouTubeLiveMessageType.Disconnected:
+                        comment = (youTubeLiveMessage as IYouTubeLiveDisconnected).Text;
+                        break;
+                    case YouTubeLiveMessageType.Comment:
+                        name = (youTubeLiveMessage as IYouTubeLiveComment).NameItems.ToText();
+                        comment = (youTubeLiveMessage as IYouTubeLiveComment).CommentItems.ToTextWithImageAlt();
+                        break;
+                    case YouTubeLiveMessageType.Superchat:
+                        name = (youTubeLiveMessage as IYouTubeLiveSuperchat).NameItems.ToText();
+                        comment = (youTubeLiveMessage as IYouTubeLiveSuperchat).PurchaseAmount + " " + (youTubeLiveMessage as IYouTubeLiveSuperchat).CommentItems.ToTextWithImageAlt();
+                        break;
+                }
+            }
+
+
+            // YouTube Live SC 等改行が入ることがある \r 置換が有効
+            // コメント中の「'」に要注意　's など英語コメントでよく入る
+            comment = comment.Replace("\n", "　").Replace("\r", "　").Replace("\'", "’").Replace("\"", "”").Replace("\\", "＼");
+            comment = comment.Replace("$", "＄").Replace("/", "／").Replace(",", "，");
+            name = name.Replace("\n", "　").Replace("\r", "　").Replace("\'", "’").Replace("\"", "”").Replace("\\", "＼");
+            name = name.Replace("$", "＄").Replace("/", "／").Replace(",", "，");
+
+            // 念のため
+            if (name == null)
+            {
+                name = "（名前なし）";
+            }
+            if (comment == null)
+            {
+                comment = "（本文なし）";
+            }
+
+            return (name, comment);
+        }
+
+        private static string ToTextWithImageAlt(this IEnumerable<IMessagePart> parts)
+        {
+            string s = "";
+            if (parts != null)
+            {
+                foreach (var part in parts)
+                {
+                    if (part is IMessageText text)
+                    {
+                        s += text;
+                    }
+                    else if (part is IMessageImage image)
+                    {
+                        s += image.Alt;
+                    }
+                }
+            }
+            return s;
+        }
     }
 }

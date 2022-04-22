@@ -42,13 +42,16 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Plugin">
+    <Reference Include="Plugin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Downloads\MultiCommentViewer_v0.6.18_stable\dll\Plugin.dll</HintPath>
     </Reference>
-    <Reference Include="PluginCommon">
+    <Reference Include="PluginCommon, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Downloads\MultiCommentViewer_v0.6.18_stable\dll\PluginCommon.dll</HintPath>
     </Reference>
-    <Reference Include="SitePlugin">
+    <Reference Include="SitePlugin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Downloads\MultiCommentViewer_v0.6.18_stable\dll\SitePlugin.dll</HintPath>
     </Reference>
     <Reference Include="SuperSimpleTcp, Version=2.6.0.7, Culture=neutral, processorArchitecture=MSIL">
@@ -190,7 +193,12 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
-    <Reference Include="YouTubeLiveSitePlugin">
+    <Reference Include="YouTubeLiveIF, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Downloads\MultiCommentViewer_v0.6.18_stable\dll\YouTubeLiveIF.dll</HintPath>
+    </Reference>
+    <Reference Include="YouTubeLiveSitePlugin, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Downloads\MultiCommentViewer_v0.6.18_stable\dll\YouTubeLiveSitePlugin.dll</HintPath>
     </Reference>
   </ItemGroup>
