@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MunouPlugin
@@ -17,6 +10,8 @@ namespace MunouPlugin
         {
             this.parent = panret;
             InitializeComponent();
+            chk_SayName.Checked = parent.readName;
+            chk_SuperchatOnly.Checked = parent.superchatOnly;
         }
 
         private void bt_Test_Click(object sender, EventArgs e)
@@ -27,6 +22,11 @@ namespace MunouPlugin
         private void chk_SayName_CheckedChanged(object sender, EventArgs e)
         {
             parent.readName = chk_SayName.Checked;
+        }
+
+        private void chk_SuperchatOnly_CheckedChanged(object sender, EventArgs e)
+        {
+            parent.superchatOnly = chk_SuperchatOnly.Checked;
         }
     }
 }
